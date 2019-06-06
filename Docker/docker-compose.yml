@@ -1,0 +1,33 @@
+version: '3'
+services:
+  backend:
+    container_name: jdk
+    build:
+      context: ../.
+      dockerfile: Docker/jdk/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - "../backend:/usr/src/backend/"
+    depends_on:
+      - db
+  db:
+    container_name: mongod
+    build:
+      context: ../.
+      dockerfile: Docker/mongo/Dockerfile
+    ports: 
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+  server:
+    container_name: serve
+    build:
+      context: ../.
+      dockerfile: Docker/node/Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - "../frontend:/usr/src/frontend/"
+      - "/usr/src/backend/node_modules/"
