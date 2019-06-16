@@ -5,12 +5,14 @@ services:
     build:
       context: ../.
       dockerfile: Docker/jdk/Dockerfile
+    # command: catalina.sh run
     ports:
-      - "8000:8000"
+      - "8000:8080"
     volumes:
-      - "../backend:/usr/src/backend/"
-    depends_on:
-      - db
+      - ../maven-repo:/root/.m2
+      - "../backend:/usr/src/backend"
+    #   - ../m2-repo:/usr/share/maven/ref/.m2/repository
+    tty: true
   db:
     container_name: mongod
     build:
@@ -21,6 +23,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    tty: true
   server:
     container_name: serve
     build:
@@ -31,3 +34,4 @@ services:
     volumes:
       - "../frontend:/usr/src/frontend/"
       - "/usr/src/backend/node_modules/"
+    tty: true
