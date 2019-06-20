@@ -5,13 +5,12 @@ services:
     build:
       context: ../.
       dockerfile: Docker/jdk/Dockerfile
-    # command: catalina.sh run
     ports:
       - "8000:8080"
+    # command: mvn backend
     volumes:
-      - ../maven-repo:/root/.m2
-      - "../backend:/usr/src/backend"
-    #   - ../m2-repo:/usr/share/maven/ref/.m2/repository
+      - ../settings/maven-repo:/root/.m2
+      - "../app:/usr/src/app/"
     tty: true
   db:
     container_name: mongod

@@ -69,7 +69,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 RUN mkdir -p /usr/src/frontend/
 
-COPY frontend/. /usr/src/frontend/
+# COPY frontend/. /usr/src/frontend/
 
 VOLUME /usr/src/frontend/
 

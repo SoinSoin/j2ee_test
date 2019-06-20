@@ -27,17 +27,19 @@ ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"]
 
 
 # COPY Docker/jdk/pom.xml .
-RUN cd /usr/src/  && \
-  mvn archetype:generate -DgroupId=app -DartifactId=backend  -DarchetypeVersion=1.0-SNAPSHOT -DinteractiveMode=false
 
 # # RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml archetype:generate dependency:resolve -DarchetypeArtifactId=maven-archetype-quickstart
 
-WORKDIR /usr/src/backend
+WORKDIR /usr/src/app/
 
-COPY backend .
+COPY app .
 
-VOLUME /usr/src/backend
+RUN  cd backend && \
+  mvn install
 
-CMD ["mvn"]
+VOLUME /usr/src/app/
 
-# EXPOSE 8080
+EXPOSE 8080
+
+CMD ["mvn","tomcat7:run","-f","backend"]
+

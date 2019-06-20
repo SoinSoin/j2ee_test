@@ -6,12 +6,12 @@ RUN groupadd -r mongodb && useradd -r -g mongodb mongodb
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		ca-certificates \
-		jq \
-		numactl \
+	ca-certificates \
+	jq \
+	numactl \
 	; \
 	if ! command -v ps > /dev/null; then \
-		apt-get install -y --no-install-recommends procps; \
+	apt-get install -y --no-install-recommends procps; \
 	fi; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -24,10 +24,10 @@ RUN set -ex; \
 	\
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
-		wget \
+	wget \
 	; \
 	if ! command -v gpg > /dev/null; then \
-		apt-get install -y --no-install-recommends gnupg dirmngr; \
+	apt-get install -y --no-install-recommends gnupg dirmngr; \
 	fi; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
@@ -44,7 +44,7 @@ RUN set -ex; \
 	gosu nobody true; \
 	\
 	wget -O /js-yaml.js "https://github.com/nodeca/js-yaml/raw/${JSYAML_VERSION}/dist/js-yaml.js"; \
-# TODO some sort of download verification here
+	# TODO some sort of download verification here
 	\
 	apt-get purge -y --auto-remove wget
 
@@ -54,7 +54,7 @@ ENV GPG_KEYS 9DA31620334BD75D9DCB49F368818C72E52529D4
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	for key in $GPG_KEYS; do \
-		gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	done; \
 	gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mongodb.gpg; \
 	command -v gpgconf && gpgconf --kill all || :; \
@@ -77,11 +77,11 @@ RUN echo "deb http://$MONGO_REPO/apt/ubuntu xenial/${MONGO_PACKAGE%-unstable}/$M
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y \
-		${MONGO_PACKAGE}=$MONGO_VERSION \
-		${MONGO_PACKAGE}-server=$MONGO_VERSION \
-		${MONGO_PACKAGE}-shell=$MONGO_VERSION \
-		${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
-		${MONGO_PACKAGE}-tools=$MONGO_VERSION \
+	${MONGO_PACKAGE}=$MONGO_VERSION \
+	${MONGO_PACKAGE}-server=$MONGO_VERSION \
+	${MONGO_PACKAGE}-shell=$MONGO_VERSION \
+	${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
+	${MONGO_PACKAGE}-tools=$MONGO_VERSION \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /var/lib/mongodb \
 	&& mv /etc/mongod.conf /etc/mongod.conf.orig
@@ -94,5 +94,4 @@ COPY Docker/mongo/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 27017
-
 CMD ["mongod"]
