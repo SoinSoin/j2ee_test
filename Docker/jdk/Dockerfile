@@ -25,11 +25,6 @@ COPY Docker/jdk/settings-docker.xml /usr/share/maven/ref/
 
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"] 
 
-
-# COPY Docker/jdk/pom.xml .
-
-# # RUN mvn -B -f pom.xml -s /usr/share/maven/ref/settings-docker.xml archetype:generate dependency:resolve -DarchetypeArtifactId=maven-archetype-quickstart
-
 WORKDIR /usr/src/app/
 
 COPY app .
