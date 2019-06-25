@@ -21,16 +21,17 @@ ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 COPY Docker/jdk/mvn-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/mvn-entrypoint.sh
 COPY Docker/jdk/settings-docker.xml /usr/share/maven/ref/
-
+RUN chmod +x /usr/share/maven/ref/settings-docker.xml
 ENTRYPOINT ["/usr/local/bin/mvn-entrypoint.sh"] 
 
 WORKDIR /usr/src/app/
 
 COPY app .
 
-RUN  cd backend && \
-  mvn install
+# RUN  cd backend && \
+  # mvn install
 
 VOLUME /usr/src/app/
 
