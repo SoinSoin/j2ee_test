@@ -30,12 +30,15 @@ WORKDIR /usr/src/app/
 
 COPY app .
 
-# RUN  cd backend && \
-  # mvn install
+RUN  cd backend && \
+  mvn clean 
+#   mvn install
 
 VOLUME /usr/src/app/
 
 EXPOSE 8080
 
-CMD ["mvn","tomcat7:run","-f","backend"]
+CMD ["mvn","clean","spring-boot:run","-f","backend"]
+
+# mvn  spring-boot:repackage 
 

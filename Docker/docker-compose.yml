@@ -7,7 +7,7 @@ services:
       dockerfile: Docker/jdk/Dockerfile
     ports:
       - "8000:8080"
-    # command: mvn backend
+    # command: mvn spring-boot:run -f backend
     volumes:
       - ../settings/maven-repo:/root/.m2
       - "../app:/usr/src/app/"
@@ -22,6 +22,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: db
     tty: true
   server:
     container_name: serve
