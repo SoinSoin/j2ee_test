@@ -62,18 +62,26 @@ RUN set -ex \
   && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
+  && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz 
 
 COPY Docker/node/docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+	&& yarn global add nodemon
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
-RUN mkdir -p /usr/src/frontend/
+WORKDIR /usr/src/app/
 
-# COPY frontend/. /usr/src/frontend/
+COPY app .
 
-VOLUME /usr/src/frontend/
+RUN cd middle-serve \
+	&& yarn install
 
-EXPOSE 8888
+
+RUN cd client \
+	&& yarn install
+
+VOLUME /usr/src/app/
+
+EXPOSE 8888 8000
 
 CMD [ "node" ]
