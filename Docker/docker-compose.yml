@@ -6,7 +6,8 @@ services:
       context: ../.
       dockerfile: Docker/jdk/Dockerfile
     ports:
-      - "8000:8080"
+      - "8080:8080"
+      - "35729:35729"
     # command: mvn spring-boot:run -f backend
     volumes:
       - ../settings/maven-repo:/root/.m2

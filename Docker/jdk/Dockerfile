@@ -36,9 +36,9 @@ RUN  cd backend && \
 
 VOLUME /usr/src/app/
 
-EXPOSE 8080
+EXPOSE 8080 35729
 
-CMD ["mvn","clean","spring-boot:run","-f","backend"]
+CMD ["mvn","spring-boot:run","-f","backend"]
 
 # mvn  spring-boot:repackage 
 
