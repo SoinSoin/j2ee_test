@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    private static final String template = "lnop, %s!";
+    private static final String template = "he, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping("/hello")
-    public Hello hello(@RequestParam(value="name", defaultValue="World") String name) {
+    public Hello hello(@RequestParam(value="name", defaultValue="new") String name) {
         return new Hello(counter.incrementAndGet(),
                             String.format(template, name));
     }

@@ -12,6 +12,8 @@ services:
     volumes:
       - ../settings/maven-repo:/root/.m2
       - "../app:/usr/src/app/"
+    depends_on: 
+      - db
     tty: true
   db:
     container_name: mongod
