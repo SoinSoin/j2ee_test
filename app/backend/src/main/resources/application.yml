@@ -5,7 +5,7 @@ spring:
     devtools:
         restart:
             enabled: true
-            additional-paths: .
+             # additional-paths: .
     freemarker:
         cache: false
     thymeleaf:

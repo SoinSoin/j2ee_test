@@ -10,8 +10,8 @@ services:
       - "35729:35729"
     # command: mvn spring-boot:run -f backend
     volumes:
-      - ../settings/maven-repo:/root/.m2
-      - "../app:/usr/src/app/"
+      # - ../settings/home/gradle/.gradle
+      - "../app/backend:/usr/src/app/backend"
     depends_on: 
       - db
     tty: true
