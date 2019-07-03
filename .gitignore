@@ -59,6 +59,6 @@ yarn-error.log*
 
 #Gradle
 .gradletasknamecache
-.gradle/
+/.gradle/
 build/
 bin/
