@@ -8,9 +8,9 @@ services:
     ports:
       - "8080:8080"
       - "35729:35729"
-    # command: mvn spring-boot:run -f backend
+    command: gradle bootRun
     volumes:
-      # - ../settings/home/gradle/.gradle
+      - ../settings/gradle:/home/gradle/.gradle
       - "../app/backend:/usr/src/app/backend"
     depends_on: 
       - db
@@ -25,7 +25,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: db
+      MONGO_INITDB_DATABASE: bdd
     tty: true
   server:
     container_name: serve

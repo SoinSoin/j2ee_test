@@ -13,7 +13,7 @@ RUN set -o errexit -o nounset \
     && echo "Symlinking root Gradle cache to gradle Gradle cache" \
     && ln -s /home/gradle/.gradle /root/.gradle
 
-# VOLUME /home/gradle/.gradle
+VOLUME /home/gradle/.gradle
 
 # WORKDIR /home/gradle
 
@@ -53,13 +53,13 @@ COPY app /usr/src/app/.
 
 WORKDIR /usr/src/app/backend/
 
-VOLUME /usr/src/app/
+# COPY Docker/jdk/docker-entrypoint.sh /
+# RUN chmod +x /docker-entrypoint.sh
+# ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+VOLUME /usr/src/app/backend/
 
 EXPOSE 8080 35729
 
-# CMD ["mvn","spring-boot:run","-f","backend"]
-
-CMD ["gradle","bootRun"]
-
-# mvn  spring-boot:repackage 
+# CMD ["gradle", "bootRun"]
 
