@@ -59,6 +59,9 @@ yarn-error.log*
 
 #Gradle
 .gradletasknamecache
-/app/backend/.gradle/
+.gradle/
 build/
 bin/
+
+#Perso
+docs/
