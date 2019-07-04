@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/hello")
 public class HelloController {
-    private static final String template = "change, %s!";
+    private static final String template = "val, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping
